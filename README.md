@@ -39,12 +39,12 @@ ui = true
 ## 2. Set vault address environment variable and run vault.
 ##### Note if you get a HTTPS error at any point, make sure $VAULT_ADDR is http: not https
 export VAULT_ADDR='http://127.0.0.1:8200' \
-vault server -config=/opt/vault/config/vault.hcl \
+vault server -config=/opt/vault/config/vault.hcl
 
 ##### Save the keys and initial token somewhere safe
 
 ## 3. Open new terminal/session and switch to vault user then initialize the vault
-sudo su - vault \
+sudo su - vault
 
 export VAULT_ADDR='http://127.0.0.1:8200' \
 vault operator init
@@ -66,24 +66,24 @@ vault operator unseal \
 
 ### Scripts - and services - see additional files for content
 sudo vi /etc/vault.d/vault-unseal.env \
-sudo vi /usr/local/bin/unseal-vault.sh \
+sudo vi /usr/local/bin/unseal-vault.sh 
 
 sudo chown vault:vault /etc/vault.d/vault-unseal.env \
 sudo chown vault:vault /usr/local/bin/unseal-vault.sh \
 sudo chmod 700 /usr/local/bin/unseal-vault.sh \
-sudo chmod 400 /etc/vault.d/vault-unseal.env \
+sudo chmod 400 /etc/vault.d/vault-unseal.env 
 
 #### Services
 sudo vi /etc/systemd/system/vault.service \
-sudo vi /etc/systemd/system/vault-unseal.service \
+sudo vi /etc/systemd/system/vault-unseal.service 
 
 sudo systemctl daemon-reload \
 sudo systemctl enable vault.service \
 sudo systemctl enable vault-unseal.service \
-sudo systemctl start vault.service \
+sudo systemctl start vault.service 
 
 ### Check vault status
-sudo systemctl status vault.service \
+sudo systemctl status vault.service 
 
 ```
 bonzadm@onlybeans:~$ sudo systemctl status vault.service
