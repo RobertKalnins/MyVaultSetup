@@ -1,0 +1,16 @@
+[Unit]
+Description=Unseal Vault
+After=vault.service
+Wants=vault.service
+PartOf=vault.service
+
+[Service]
+User=vault
+Group=vault
+Type=oneshot
+RemainAfterExit=true
+ExecStart=/usr/local/bin/unseal-vault.sh
+EnvironmentFile=/etc/vault.d/vault-unseal.env
+
+[Install]
+WantedBy=multi-user.target

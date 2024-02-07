@@ -1,0 +1,24 @@
+[Unit]
+Description=Vault
+Requires=network-online.target
+After=network-online.target
+ConditionFileNotEmpty=/opt/vault/config/vault.hcl
+
+[Service]
+User=vault
+Group=vault
+ProtectSystem=full
+ProtectHome=read-only
+PrivateTmp=yes
+PrivateDevices=yes
+SecureBits=keep-caps
+AmbientCapabilities=CAP_IPC_LOCK
+NoNewPrivileges=true
+ExecStart=/usr/bin/vault server -config=/opt/vault/config/vault.hcl
+ExecReload=/bin/kill --signal HUP
+KillMode=process
+Restart=on-failure
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
